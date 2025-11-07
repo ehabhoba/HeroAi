@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HieroAI – Ancient Egypt Intelligence Platform</title>
+    <meta name="description" content="AI-powered interactive educational web app to translate hieroglyphs, analyze artifacts, and explore the Grand Egyptian Museum.">
+    <meta name="keywords" content="Hieroglyphs, Ancient Egypt, AI Translator, Grand Egyptian Museum, Artifact Analyzer, Egyptology, Gemini API">
+    <meta name="author" content="HieroAI">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pharaoh-gold': '#c0a258',
+              'papyrus-beige': '#f5f1e6',
+              'nile-blue': '#2c3e50',
+              'stone-gray': '#34495e',
+              'sand-dark': '#a98c5a',
+            },
+            fontFamily: {
+              'cinzel': ['Cinzel', 'serif'],
+              'cairo': ['Cairo', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

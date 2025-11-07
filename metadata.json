@@ -1,0 +1,7 @@
+{
+  "name": "HieroAI – Ancient Egypt Intelligence Platform",
+  "description": "An AI-powered interactive educational web app to translate hieroglyphs, analyze artifacts, and explore the Grand Egyptian Museum, with multi-language support and realistic rendering capabilities.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
