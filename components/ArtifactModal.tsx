@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { MuseumArtifact } from '../types';
 import { useLocalization } from '../hooks/useLocalization';
 import Artifact3DViewer from './Artifact3DViewer';
+import { AppContext } from '../App';
 
 interface ArtifactModalProps {
     artifact: MuseumArtifact;
@@ -31,6 +32,14 @@ const modalVariants = {
 
 const ArtifactModal: React.FC<ArtifactModalProps> = ({ artifact, onClose }) => {
     const { t, language } = useLocalization();
+    const appContext = useContext(AppContext);
+
+    const handleViewInRenderer = () => {
+        if (appContext) {
+            appContext.viewInRenderer(artifact.imageUrl);
+            onClose(); // Close modal after clicking
+        }
+    };
 
     return (
         <Backdrop onClick={onClose}>
@@ -61,6 +70,7 @@ const ArtifactModal: React.FC<ArtifactModalProps> = ({ artifact, onClose }) => {
                     </div>
                     <div className="mt-6 flex flex-col sm:flex-row gap-4">
                         <button
+                            onClick={handleViewInRenderer}
                             className="flex-1 py-3 px-4 bg-gold text-black font-bold rounded-lg shadow-md hover:opacity-90 transition-opacity"
                         >
                             {t('viewInRenderer')}

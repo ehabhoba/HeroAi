@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, createContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import Header from './components/Header';
@@ -33,10 +33,18 @@ interface ThemeContextType {
 }
 export const ThemeContext = React.createContext<ThemeContextType | null>(null);
 
+interface AppContextType {
+    setActiveView: (view: View) => void;
+    viewInRenderer: (imageUrl: string) => void;
+}
+export const AppContext = createContext<AppContextType | null>(null);
+
+
 const App: React.FC = () => {
   const [view, setView] = useState<View>('home');
   const [language, setLanguage] = useState<Language>('en');
   const [theme, setTheme] = useState<Theme>('light');
+  const [initialRenderUrl, setInitialRenderUrl] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -58,6 +66,11 @@ const App: React.FC = () => {
     return langData?.[key] || key;
   }, [language]);
 
+  const viewInRenderer = useCallback((imageUrl: string) => {
+    setInitialRenderUrl(imageUrl);
+    setView('render');
+  }, []);
+
   const localizationContextValue = useMemo(() => ({
     language,
     setLanguage: handleSetLanguage,
@@ -69,11 +82,17 @@ const App: React.FC = () => {
     setTheme,
   }), [theme, setTheme]);
 
+  const appContextValue = useMemo(() => ({
+      setActiveView: setView,
+      viewInRenderer,
+  }), [viewInRenderer]);
+
+
   const renderView = () => {
     switch (view) {
       case 'home': return <HomePage setActiveView={setView} />;
       case 'translate': return <HieroglyphTranslator />;
-      case 'render': return <RealisticRenderer />;
+      case 'render': return <RealisticRenderer initialImageUrl={initialRenderUrl} onClearInitialImage={() => setInitialRenderUrl(null)} />;
       case 'library': return <Library />;
       case 'learn': return <LearningHub />;
       case 'museum': return <MuseumExplorer />;
@@ -100,24 +119,26 @@ const App: React.FC = () => {
   return (
     <LocalizationContext.Provider value={localizationContextValue}>
       <ThemeContext.Provider value={themeContextValue}>
-        <div className={`flex flex-col min-h-screen transition-colors duration-500 font-sans bg-light-bg dark:bg-dark-bg ${language === 'ar' ? 'font-kufi' : ''}`}>
-          <Header activeView={view} setActiveView={setView} />
-          <main className="flex-grow container mx-auto px-4 py-8 w-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={view}
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
-                {renderView()}
-              </motion.div>
-            </AnimatePresence>
-          </main>
-          <Footer />
-        </div>
+        <AppContext.Provider value={appContextValue}>
+            <div className={`flex flex-col min-h-screen transition-colors duration-500 font-sans bg-light-bg dark:bg-dark-bg ${language === 'ar' ? 'font-kufi' : ''}`}>
+            <Header activeView={view} setActiveView={setView} />
+            <main className="flex-grow container mx-auto px-4 py-8 w-full">
+                <AnimatePresence mode="wait">
+                <motion.div
+                    key={view}
+                    initial="initial"
+                    animate="in"
+                    exit="out"
+                    variants={pageVariants}
+                    transition={pageTransition}
+                >
+                    {renderView()}
+                </motion.div>
+                </AnimatePresence>
+            </main>
+            <Footer />
+            </div>
+        </AppContext.Provider>
       </ThemeContext.Provider>
     </LocalizationContext.Provider>
   );
