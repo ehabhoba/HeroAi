@@ -1,37 +1,98 @@
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HieroAI – Ancient Egypt Intelligence Platform</title>
-    <meta name="description" content="AI-powered interactive educational web app to translate hieroglyphs, analyze artifacts, and explore the Grand Egyptian Museum.">
-    <meta name="keywords" content="Hieroglyphs, Ancient Egypt, AI Translator, Grand Egyptian Museum, Artifact Analyzer, Egyptology, Gemini API">
+    <meta name="description" content="AI-powered interactive educational web app to translate hieroglyphs, analyze artifacts, and explore the Grand Egyptian Museum. Translate Hieroglyphs and analyze Pharaonic inscriptions using AI – a CairoEG 2025 project.">
+    <meta name="keywords" content="Hieroglyphs, Ancient Egypt, AI Translator, Grand Egyptian Museum, Artifact Analyzer, Egyptology, Gemini API, CairoEG">
     <meta name="author" content="HieroAI">
+    <meta name="theme-color" content="#1a1a1a"/>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cairoeg.online/">
+    <meta property="og:title" content="HieroAI – Ancient Egypt Intelligence Platform">
+    <meta property="og:description" content="Translate ancient hieroglyphs, analyze priceless artifacts, and explore the wonders of Ancient Egypt with the power of AI.">
+    <meta property="og:image" content="https://cairoeg.online/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cairoeg.online/">
+    <meta property="twitter:title" content="HieroAI – Ancient Egypt Intelligence Platform">
+    <meta property="twitter:description" content="Translate ancient hieroglyphs, analyze priceless artifacts, and explore the wonders of Ancient Egypt with the power of AI.">
+    <meta property="twitter:image" content="https://cairoeg.online/og-image.png">
     
+    <link rel="manifest" href="/manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Kufi+Arabic:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      body {
+        --bg-light: #f7f2e9; /* Lighter Papyrus */
+        --bg-dark: #1a1a1a;
+        --text-light: #2d2d2d;
+        --text-dark: #e0e0e0;
+        --texture-url: url('https://www.transparenttextures.com/patterns/papyrus-dark.png');
+      }
+      html.light body {
+        background-color: var(--bg-light);
+        color: var(--text-light);
+        background-image: var(--texture-url);
+      }
+      html.dark body {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+      }
+    </style>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              'pharaoh-gold': '#c0a258',
-              'papyrus-beige': '#f5f1e6',
-              'nile-blue': '#2c3e50',
-              'stone-gray': '#34495e',
-              'sand-dark': '#a98c5a',
+              'gold': '#D4AF37',
+              'sand': '#E3D8B7',
+              'black': '#000000',
+              'charcoal': '#1F1F1F',
+              'light-paper': 'rgba(247, 242, 233, 0.8)',
+              'dark-paper': 'rgba(31, 31, 31, 0.8)',
+              'light-text': '#2d2d2d',
+              'dark-text': '#e0e0e0',
+              'light-border': 'rgba(0,0,0,0.1)',
+              'dark-border': 'rgba(255,255,255,0.2)',
             },
             fontFamily: {
-              'cinzel': ['Cinzel', 'serif'],
-              'cairo': ['Cairo', 'sans-serif'],
+              'display': ['"Playfair Display"', 'serif'],
+              'sans': ['"Roboto"', 'sans-serif'],
+              'kufi': ['"Noto Kufi Arabic"', 'sans-serif'],
             }
           }
         }
       }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "HieroAI",
+      "url": "https://cairoeg.online/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "HieroAI Project",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cairoeg.online/logo.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://cairoeg.online/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
     </script>
   <script type="importmap">
 {
@@ -40,7 +101,12 @@
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0"
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.5.0",
+    "three": "https://aistudiocdn.com/three@^0.168.0",
+    "three/": "https://aistudiocdn.com/three@^0.168.0/",
+    "@react-three/fiber": "https://aistudiocdn.com/@react-three/fiber@^8.16.8",
+    "@react-three/drei": "https://aistudiocdn.com/@react-three/drei@^9.111.0"
   }
 }
 </script>
@@ -48,5 +114,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('SW registered: ', registration);
+          }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+        });
+      }
+    </script>
   </body>
 </html>

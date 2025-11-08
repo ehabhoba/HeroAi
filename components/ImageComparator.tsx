@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useLocalization } from '../hooks/useLocalization';
 
@@ -30,7 +29,7 @@ const ImageComparator: React.FC<ImageComparatorProps> = ({ original, rendered })
     isDragging.current = false;
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging.current) return;
     handleMove(e.clientX);
   };
@@ -39,26 +38,34 @@ const ImageComparator: React.FC<ImageComparatorProps> = ({ original, rendered })
     isDragging.current = true;
   }
   
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: TouchEvent) => {
     if(!isDragging.current) return;
     handleMove(e.touches[0].clientX);
   }
 
   useEffect(() => {
-    document.addEventListener('mouseup', handleMouseUp);
+    const currentContainer = containerRef.current;
+    
+    const handleMouseUpGlobal = () => { isDragging.current = false; };
+    const handleTouchEndGlobal = () => { isDragging.current = false; };
+    
+    currentContainer?.addEventListener('mousemove', handleMouseMove);
+    currentContainer?.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('mouseup', handleMouseUpGlobal);
+    window.addEventListener('touchend', handleTouchEndGlobal);
+
     return () => {
-      document.removeEventListener('mouseup', handleMouseUp);
+      currentContainer?.removeEventListener('mousemove', handleMouseMove);
+      currentContainer?.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('mouseup', handleMouseUpGlobal);
+      window.removeEventListener('touchend', handleTouchEndGlobal);
     };
-  }, []);
+  }, [handleMove]);
 
   return (
     <div 
         ref={containerRef} 
-        className="relative w-full aspect-video select-none rounded-lg overflow-hidden shadow-2xl border-4 border-pharaoh-gold"
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleMouseUp}
+        className="relative w-full aspect-video select-none rounded-lg overflow-hidden shadow-2xl border-4 border-gold"
     >
       <img src={original} alt={t('original')} className="absolute inset-0 w-full h-full object-contain pointer-events-none" />
       <div 
@@ -74,8 +81,8 @@ const ImageComparator: React.FC<ImageComparatorProps> = ({ original, rendered })
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
-          <svg className="w-6 h-6 text-nile-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm">
+          <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
           </svg>
         </div>

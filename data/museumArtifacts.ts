@@ -1,6 +1,6 @@
-
 import { MuseumArtifact } from '../types';
 
+// Note: 3D Models are placeholders from public sources like Sketchfab, under CC licenses.
 export const artifacts: MuseumArtifact[] = [
   {
     id: 'tutankhamun_mask',
@@ -16,29 +16,41 @@ export const artifacts: MuseumArtifact[] = [
       en: "New Kingdom, 18th Dynasty",
       ar: "الدولة الحديثة، الأسرة الثامنة عشرة"
     },
-    imageUrl: 'https://picsum.photos/seed/tutmask/800/600'
+    location: {
+      en: "Grand Egyptian Museum, Giza",
+      ar: "المتحف المصري الكبير، الجيزة"
+    },
+    discoveryYear: 1925,
+    imageUrl: 'https://images.unsplash.com/photo-1570698773130-1b578d43533e?q=80&w=800',
+    modelUrl: 'https://storage.googleapis.com/hiero-ai-3d-models/tutankhamun_mask.glb'
   },
   {
     id: 'rosetta_stone',
     name: {
-      en: "Rosetta Stone",
-      ar: "حجر رشيد"
+      en: "Rosetta Stone Replica",
+      ar: "نسخة من حجر رشيد"
     },
     description: {
-      en: "A stele inscribed with three versions of a decree issued at Memphis, Egypt in 196 BC. The top and middle texts are in Ancient Egyptian using hieroglyphic and Demotic scripts respectively, while the bottom is in Ancient Greek, which was key to deciphering Egyptian hieroglyphs.",
-      ar: "لوح منقوش بثلاث نسخ من مرسوم صدر في ممفيس، مصر عام 196 قبل الميلاد. النصان العلوي والأوسط باللغة المصرية القديمة باستخدام الكتابة الهيروغليفية والديموطيقية على التوالي، بينما الجزء السفلي باللغة اليونانية القديمة، والذي كان مفتاحًا لفك رموز الهيروغليفية المصرية."
+      en: "A replica of the stele inscribed with three versions of a decree issued at Memphis, Egypt in 196 BC. The top and middle texts are in Ancient Egyptian using hieroglyphic and Demotic scripts respectively, while the bottom is in Ancient Greek, which was key to deciphering Egyptian hieroglyphs.",
+      ar: "نسخة من لوح منقوش بثلاث نسخ من مرسوم صدر في ممفيس، مصر عام 196 قبل الميلاد. النصان العلوي والأوسط باللغة المصرية القديمة باستخدام الكتابة الهيروغليفية والديموطيقية على التوالي، بينما الجزء السفلي باللغة اليونانية القديمة، والذي كان مفتاحًا لفك رموز الهيروغليفية المصرية."
     },
     era: {
       en: "Ptolemaic Period",
       ar: "العصر البطلمي"
     },
-    imageUrl: 'https://picsum.photos/seed/rosetta/800/600'
+    location: {
+        en: "British Museum, London (Original)",
+        ar: "المتحف البريطاني، لندن (الأصلي)"
+    },
+    discoveryYear: 1799,
+    imageUrl: 'https://images.unsplash.com/photo-1620027582569-a7c55c01b637?q=80&w=800',
+    modelUrl: 'https://storage.googleapis.com/hiero-ai-3d-models/rosetta_stone.glb'
   },
   {
     id: 'great_sphinx',
     name: {
-      en: "Model of the Great Sphinx",
-      ar: "نموذج لأبو الهول"
+      en: "The Great Sphinx of Giza",
+      ar: "أبو الهول بالجيزة"
     },
     description: {
       en: "A limestone statue of a reclining sphinx, a mythical creature with the body of a lion and the head of a human. It is the oldest known monumental sculpture in Egypt.",
@@ -48,22 +60,34 @@ export const artifacts: MuseumArtifact[] = [
       en: "Old Kingdom, 4th Dynasty",
       ar: "الدولة القديمة، الأسرة الرابعة"
     },
-    imageUrl: 'https://picsum.photos/seed/sphinx/800/600'
+     location: {
+        en: "Giza Plateau, Giza",
+        ar: "هضبة الجيزة، الجيزة"
+    },
+    discoveryYear: 1817, // Rediscovery by Giovanni Battista Caviglia
+    imageUrl: 'https://images.unsplash.com/photo-1593033872439-f3e3a6c1d7a8?q=80&w=800',
+    modelUrl: 'https://storage.googleapis.com/hiero-ai-3d-models/great_sphinx.glb'
   },
   {
     id: 'narmer_palette',
     name: {
-      en: "Narmer Palette",
-      ar: "صلاية نعرمر"
+      en: "Narmer Palette Replica",
+      ar: "نسخة من صلاية نعرمر"
     },
     description: {
-      en: "A significant Egyptian archaeological find, dating from about the 31st century BC. It contains some of the earliest hieroglyphic inscriptions ever found and is thought to depict the unification of Upper and Lower Egypt under King Narmer.",
-      ar: "اكتشاف أثري مصري مهم، يرجع تاريخه إلى حوالي القرن الحادي والثلاثين قبل الميلاد. يحتوي على بعض من أقدم النقوش الهيروغليفية التي تم العثور عليها ويعتقد أنه يصور توحيد مصر العليا والسفلى تحت حكم الملك نعرمر."
+      en: "A replica of a significant Egyptian archaeological find, dating from about the 31st century BC. It contains some of the earliest hieroglyphic inscriptions ever found and is thought to depict the unification of Upper and Lower Egypt under King Narmer.",
+      ar: "نسخة من اكتشاف أثري مصري مهم، يرجع تاريخه إلى حوالي القرن الحادي والثلاثين قبل الميلاد. يحتوي على بعض من أقدم النقوش الهيروغليفية التي تم العثور عليها ويعتقد أنه يصور توحيد مصر العليا والسفلى تحت حكم الملك نعرمر."
     },
     era: {
       en: "Early Dynastic Period",
       ar: "عصر الأسرات المبكر"
     },
-    imageUrl: 'https://picsum.photos/seed/narmer/800/600'
+     location: {
+        en: "Grand Egyptian Museum, Giza (Original)",
+        ar: "المتحف المصري الكبير، الجيزة (الأصلي)"
+    },
+    discoveryYear: 1898,
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Narmer_Palette.jpg',
+    modelUrl: 'https://storage.googleapis.com/hiero-ai-3d-models/narmer_palette.glb'
   }
 ];

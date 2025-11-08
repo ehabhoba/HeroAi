@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from 'react';
 import { useLocalization } from '../hooks/useLocalization';
 
@@ -47,24 +46,24 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect, promptText
 
   return (
     <div 
-        className={`w-full max-w-lg mx-auto border-2 border-dashed rounded-lg p-8 text-center transition-colors duration-300 ${dragOver ? 'border-pharaoh-gold bg-pharaoh-gold/10' : 'border-sand-dark/50'}`}
+        className={`w-full max-w-lg mx-auto border-2 border-dashed rounded-lg p-8 text-center transition-colors duration-300 ${dragOver ? 'border-gold bg-gold/10' : 'border-light-border dark:border-dark-border'}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
     >
-      <p className="mb-4 text-stone-gray">{promptText}</p>
+      <p className="mb-4 text-light-text dark:text-dark-text">{promptText}</p>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-pharaoh-gold text-nile-blue font-bold rounded-lg shadow-md hover:bg-sand-dark transition-all duration-300"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-gold text-black font-bold rounded-lg shadow-md hover:opacity-90 transition-all duration-300"
         >
           <UploadIcon />
           {t('uploadImage')}
         </button>
-        <span className="font-bold text-stone-gray/80">{t('or')}</span>
+        <span className="font-bold text-light-text/80 dark:text-dark-text/80">{t('or')}</span>
         <button
           onClick={() => cameraInputRef.current?.click()}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-nile-blue text-papyrus-beige font-bold rounded-lg shadow-md hover:bg-stone-gray transition-all duration-300"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-charcoal text-sand font-bold rounded-lg shadow-md hover:bg-black transition-all duration-300"
         >
           <CameraIcon />
           {t('captureImage')}
