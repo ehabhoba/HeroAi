@@ -79,7 +79,6 @@ export const generateRealisticRender = async (imageFile: File): Promise<[string,
         model: 'gemini-2.5-flash-image',
         contents: { parts: [ imagePart, { text: prompt } ] },
         config: {
-            // FIX: responseModalities must be an array with a single `Modality.IMAGE` element for gemini-2.5-flash-image.
             responseModalities: [Modality.IMAGE],
         },
     });
